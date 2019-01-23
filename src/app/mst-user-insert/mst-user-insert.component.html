@@ -1,0 +1,46 @@
+
+<h2 align="center">Insert Master User</h2>
+<form name="form" (ngSubmit)="f.form.valid && insert()" #f="ngForm" novalidate>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput type="text" class="form-control" name="userId" [(ngModel)]="model.userId" #userId="ngModel" placeholder="User Id" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" class="form-control" name="birthDate" bsDatepicker [(ngModel)]="model.birthDate" #birthDate="ngModel" placeholder="Date of Birth"
+      [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+      </span>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" placeholder="Enter your email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" class="form-control" name="nik" [(ngModel)]="model.nik" #nik="ngModel" placeholder="NIK" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select (ngModelChange)="selectChange($event)" name="type" class="form-control" [(ngModel)]="model.type"  #type="ngModel" placeholder="Type">
+        <mat-option *ngFor="let opt of listOptions" [value]="opt.id">{{ opt.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select name="posisi_skrg" class="form-control" [(ngModel)]="model.posisi_skrg"  #posisi_skrg="ngModel" required placeholder="Posisi Sekarang">
+        <mat-option *ngFor="let mstUserRole of mstUserRoles" [value]="mstUserRole.roleCode">{{ mstUserRole.roleName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select name="posisi_dulu" class="form-control" [(ngModel)]="model.posisi_dulu"  #posisi_dulu="ngModel" placeholder="Posisi Dulu">
+        <mat-option *ngFor="let mstUserRole of mstUserRoles" [value]="mstUserRole.roleCode">{{ mstUserRole.roleName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">Insert</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <a (click)="back()" class="btn btn-link">Back</a>      
+    </div>
+  </div>
+</form>

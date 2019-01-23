@@ -1,0 +1,77 @@
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<a>Register: </a>
+<button mat-icon-button color="primary" (click)="redirectToInsert()">
+  <mat-icon class="mat-18">note_add</mat-icon>
+</button>
+
+<table mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> USER ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="birthDate">
+    <th mat-header-cell *matHeaderCellDef> DATE OF BIRTH </th>
+    <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> EMAIL </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nik">
+    <th mat-header-cell *matHeaderCellDef> NIK </th>
+    <td mat-cell *matCellDef="let element"> {{element.nik}} </td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TYPE </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+  <ng-container matColumnDef="posisi_skrg">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> POSISI SEKARANG </th>
+    <td mat-cell *matCellDef="let element"> {{element.posisi_skrg}} </td>
+  </ng-container>
+  <ng-container matColumnDef="posisi_dulu">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> POSISI DULU </th>
+    <td mat-cell *matCellDef="let element"> {{element.posisi_dulu}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="embeddDTO.createdDate">
+    <th mat-header-cell *matHeaderCellDef> CREATED DATE </th>
+    <td mat-cell *matCellDef="let element"> {{element.embeddDTO.createdDate | date}} </td>
+  </ng-container>
+  <ng-container matColumnDef="embeddDTO.lastUpdated">
+    <th mat-header-cell *matHeaderCellDef> LAST UPDATED </th>
+    <td mat-cell *matCellDef="let element"> {{element.embeddDTO.lastUpdate | date}} </td>
+  </ng-container>
+ 
+  <ng-container matColumnDef="update">
+    <th mat-header-cell *matHeaderCellDef> UPDATE </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="accent" (click)="redirectToUpdate(element.userId)">
+          <mat-icon class="mat-18">system_update</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+ 
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> DELETE </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn" (click)="redirectToDelete(element.userId)">
+          <mat-icon class="mat-18">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+ 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+</mat-paginator>
